@@ -1,0 +1,12 @@
+{
+  "longitude": -121.89,
+  "latitude": 37.29,
+  "housing_median_age": 20,
+  "total_rooms": 10,
+  "total_bedrooms": 10,
+  "population": 500,
+  "households": 200,
+  "median_income": 3.5,
+  "ocean_proximity": "INLAND",
+  "income_cat": 2
+}
