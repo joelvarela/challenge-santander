@@ -1,0 +1,15 @@
+# FastAPI - framework API
+fastapi==0.110.0  
+
+# Server ASGI
+uvicorn==0.29.0  
+
+# Validación de entrada
+pydantic==1.10.9  
+
+# Librerías de ML utilizadas en entrenamiento e inferencia
+pandas==2.2.0
+numpy==1.26.4
+scikit-learn==1.4.0
+joblib==1.3.2
+

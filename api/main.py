@@ -1,19 +1,29 @@
-from models import Estimator
+from fastapi import FastAPI
+from pydantic import BaseModel       # validación del input
+from models.estimator import Estimator  # import explícito
 
-app = fastapi.FastAPI()
+
+# modelo de validación Pydantic
+class HousingInput(BaseModel):
+    longitude: float
+    latitude: float
+    housing_median_age: float
+    total_rooms: float
+    total_bedrooms: float
+    population: float
+    households: float
+    median_income: float
+    ocean_proximity: str
+    income_cat: int
 
 
-@app.post("/predict", status_code=200)
-async def post_predict(input: dict) -> dict:
+app = FastAPI()
 
-    # Instanciación del modelo
-    model = Estimator()
-    print(model)
+# cargamos el modelo una sola vez (mejora performance)
+estimator = Estimator()
 
-    # Predicción
-    try:
-        result = model.predict(data)
-    except Exception:
-        print("Error :(")
 
-    return result
+@app.post("/predict")
+def predict(input: HousingInput):
+    # convertimos a dict para pasárselo al estimator
+    return estimator.predict(input.dict())
