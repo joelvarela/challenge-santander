@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel       # validación del input
-from models.estimator import Estimator  # import explícito
+from api.models.estimator import Estimator  # import explícito
 
 
 # modelo de validación Pydantic
