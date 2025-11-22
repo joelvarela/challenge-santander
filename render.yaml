@@ -1,7 +1,7 @@
 services:
   - type: web
     name: housing-api
-    env: python
+    env: docker
     pythonVersion: "3.10"   # <- Esto fuerza Python 3.10
     plan: free
     autoDeploy: true
