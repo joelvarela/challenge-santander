@@ -1,5 +1,5 @@
-# Base image con Python 3.11
-FROM python:3.11-slim
+# Base image con Python 3.10
+FROM python:3.10-slim
 
 # Evitar prompts de apt
 ENV DEBIAN_FRONTEND=noninteractive
