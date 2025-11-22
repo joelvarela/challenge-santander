@@ -3,7 +3,11 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from api.models.estimator import Estimator  # <-- importa con la ruta correcta
 
-app = FastAPI(title="Housing Price Estimator API")
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "API funcionando!"}
 
 # 📌 Crear la instancia del modelo solo una vez al iniciar la API
 # use_pipeline=True -> carga model_pipeline.joblib

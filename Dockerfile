@@ -27,8 +27,8 @@ RUN mkdir -p model/artifacts
 # Entrenar el modelo y generar los artefactos
 RUN python model/train.py
 
-# Exponer puerto de la API
+# Exponer puerto dinámico
 EXPOSE 8000
 
-# Comando para correr la API con uvicorn
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Comando para correr la API con puerto asignado por Render
+CMD uvicorn api.main:app --host 0.0.0.0 --port $PORT
