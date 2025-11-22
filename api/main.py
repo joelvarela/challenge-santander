@@ -1,13 +1,18 @@
 from fastapi import FastAPI
+from fastapi import FastAPI
 from pydantic import BaseModel
-from api.models.estimator import Estimator  # importa el Estimator correctamente
+from api.models.estimator import Estimator  # <-- importa con la ruta correcta
 
 app = FastAPI(title="Housing Price Estimator API")
 
-# Instancia del modelo **una sola vez** al iniciar la API
-estimator = Estimator()
+# 📌 Crear la instancia del modelo solo una vez al iniciar la API
+# use_pipeline=True -> carga model_pipeline.joblib
+# use_pipeline=False -> carga final_model.joblib
+estimator = Estimator(use_pipeline=True)
 
-# Define el esquema de input
+# ------------------------------
+# Esquema de entrada
+# ------------------------------
 class PredictionInput(BaseModel):
     longitude: float
     latitude: float
@@ -20,14 +25,18 @@ class PredictionInput(BaseModel):
     ocean_proximity: str
     income_cat: int
 
+
+# ------------------------------
+# Endpoint de predicción
+# ------------------------------
 @app.post("/predict")
 async def post_predict(input: PredictionInput):
-    data_dict = input.dict()
+    data_dict = input.dict()   # transforma el input en dict
+
     try:
-        # El Estimator debe recibir un dict o dataframe según tu implementación
-        result = estimator.predict(data_dict)
-        # Convertimos a lista para poder devolver JSON
-        output = result.tolist() if hasattr(result, "tolist") else result
-        return {"prediction": output}
+        # El estimator ahora devuelve siempre algo que se puede convertir a lista
+        result = estimator.predict([data_dict])  # <-- IMPORTANTE: envolver en lista si tu modelo espera batch
+        return {"prediction": result}
+
     except Exception as e:
         return {"error": str(e)}
