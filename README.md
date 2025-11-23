@@ -70,7 +70,7 @@ Convertir el script original de entrenamiento en un proceso:
 cd model/training
 mlflow ui  # opcional
 python train.py
-
+```
 Los resultados quedan almacenados en registry/runs/ y los modelos en registry/models/.
 
 ---
