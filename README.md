@@ -89,13 +89,13 @@ La API permite realizar predicciones en tiempo real durante la visita del tasado
 - Control horario (09:00–18:00)
 
 
-▶️ Ejecutar la API
+## ▶️ Ejecutar la API
 
 cd api
 uvicorn main:app --host 0.0.0.0 --port 8000
 
 
-📌 Ejemplo de request
+## 📌 Ejemplo de request
 - Logging estructurado
 
 - Manejo de excepciones
@@ -110,12 +110,12 @@ Swagger en /docs
 
 Dockerfile para despliegue en producción
 
-3. 🏗️ Arquitectura Batch Mensual (4M registros)
-🎯 Objetivo
+# 3. 🏗️ Arquitectura Batch Mensual (4M registros)
+## 🎯 Objetivo
 
 Ejecutar un modelo de propensión una vez por mes utilizando datos de ~4M clientes desde S3 y generar un archivo con predicciones también en S3.
 
-📐 Arquitectura propuesta
+## 📐 Arquitectura propuesta
 
        ┌───────────┐
        │   S3 Raw   │  (1.1GB CSV)
@@ -142,7 +142,7 @@ Ejecutar un modelo de propensión una vez por mes utilizando datos de ~4M client
         │   S3 Out   │ (~0.1GB)
         └───────────┘
 
-⚙️ Escalabilidad
+## ⚙️ Escalabilidad
 
 Procesamiento en chunks
 
@@ -152,12 +152,12 @@ Alternativa: Spark / Dask
 
 Autoescalado con ECS/Fargate
 
-4. ❗ Escenario: baja performance después de 6 meses
-📉 Problema
+# 4. ❗ Escenario: baja performance después de 6 meses
+## 📉 Problema
 
 El área de seguros reporta que casi ningún contacto convierte → el modelo dejó de ser efectivo.
 
-🔍 Posibles causas
+## 🔍 Posibles causas
 
 Data drift
 
@@ -167,7 +167,7 @@ Cambios en comportamiento del cliente
 
 Features desactualizados
 
-🛡️ ¿Cómo anticiparlo?
+## 🛡️ ¿Cómo anticiparlo?
 
 Monitoreo mensual o semanal
 
@@ -177,7 +177,7 @@ Alertas automáticas
 
 Seguimiento de tasa de conversión
 
-🔧 ¿Cómo solucionarlo?
+## 🔧 ¿Cómo solucionarlo?
 
 Reentrenamiento con datos recientes
 
@@ -187,7 +187,7 @@ Ajuste del feature engineering
 
 Validación previa al deployment del modelo
 
-5. 🔁 CI/CD y automatización recomendada
+# 5. 🔁 CI/CD y automatización recomendada
 
 Se automatizan:
 
@@ -203,7 +203,7 @@ Promoción del modelo (Staging → Production)
 
 Lanzamiento automático del job batch
 
-6. 🛡️ Cómo asegurar que un modelo nuevo no sea peor
+# 6. 🛡️ Cómo asegurar que un modelo nuevo no sea peor
 Estrategia utilizada:
 
 Model Registry (MLflow)
@@ -214,8 +214,52 @@ Shadow mode (predice en paralelo)
 
 Rollback automático si empeora
 
-7. 📞 Caso Extra — Clasificación de consultas sobre Créditos Hipotecarios
+# 7. 📞 Caso Extra — Clasificación de consultas sobre Créditos Hipotecarios
 
 El CRM clasifica todo como “Consulta Créditos”, pero solo 1% es verdaderamente hipotecario.
 
 ✔️ Solución basada en NLP
+
+```bash
+Grabaciones + metadatos
+        │
+        ▼
+ Speech-to-Text (Whisper / AWS Transcribe)
+        │
+        ▼
+ Limpieza y normalización del texto
+        │
+        ▼
+ Clasificador NLP binario:
+    - Embeddings (BERT / DistilBERT)
+    - Modelo supervisado (LR / SVM / LightGBM / Fine-tuned BERT)
+        │
+        ▼
+ Etiquetas hipotecario (0/1)
+        │
+        ▼
+ Feature incorporada al modelo de propensión
+```
+## Beneficios
+
+Reduce ruido
+
+Aumenta especificidad
+
+Identifica realmente consultas hipotecarias
+
+## 📝 Recomendaciones adicionales (opcional)
+
+Tests unitarios (pytest)
+
+Makefile para facilitar comandos
+
+Hooks de calidad (black, flake8, isort)
+
+Docker Compose para API + MLflow
+
+Diagramas Mermaid
+
+## 👤 Autor
+
+Joel Varela
