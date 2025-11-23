@@ -13,6 +13,7 @@ Este repositorio contiene la solución integral al challenge técnico, incluyend
 
 ## 📁 Estructura del Repositorio
 
+```bash
 .
 ├── model/
 │ ├── data/
@@ -34,7 +35,7 @@ Este repositorio contiene la solución integral al challenge técnico, incluyend
 │ └── Dockerfile
 │
 └── README.md
-
+```
 
 ---
 
