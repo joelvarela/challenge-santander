@@ -12,7 +12,7 @@ def read_root():
 # 📌 Crear la instancia del modelo solo una vez al iniciar la API
 # use_pipeline=True -> carga model_pipeline.joblib
 # use_pipeline=False -> carga final_model.joblib
-estimator = Estimator(use_pipeline=True)
+estimator = Estimator(use_pipeline=False)
 
 # ------------------------------
 # Esquema de entrada
