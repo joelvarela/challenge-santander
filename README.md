@@ -1,13 +1,54 @@
 # 🏦 Challenge Santander — Solución Completa  
 *Entrenamiento auditable · ML en producción (API + Batch) · Mejora continua · Caso NLP extra*
 
-Este repositorio contiene la solución integral al challenge técnico, incluyendo:
+Este repositorio contiene la solución al challenge técnico, incluyendo modelo, API y mejoras de ingeniería de ML.
 
-- Entrenamiento reproducible, auditable y comparable  
-- API de inferencia en producción (FastAPI)  
-- Arquitectura batch mensual para 4M clientes  
-- Estrategia de mantenimiento de modelos y CI/CD  
-- Caso extra de clasificación de consultas usando NLP  
+---
+
+## 1. 🔹 Funcionalidades implementadas en la rama `refactor`
+
+En esta rama se trabajó para lograr:
+
+- [x] Modelo de estimación de precios de propiedades (`model/`)
+- [x] API de inferencia en FastAPI (`api/`) con:
+  - [x] Endpoint `/predict` para predicciones
+  - [x] Dockerfile para despliegue
+  - [x] Validación básica de inputs
+- [x] Contenedor listo para ejecución local o despliegue
+- [x] Estructura modular del proyecto (`model/` y `api/` separadas)
+- [x] Scripts de entrenamiento e inferencia básicos (`train.py` y `inference.py`)
+- [x] Repositorio organizado con `requirements.txt` y README inicial
+
+> ✅ Estado: funcional para pruebas locales y despliegue de la API.
+
+---
+
+## 2. 🛠 Roadmap Técnico: Funcionalidades faltantes / próximas mejoras
+
+El objetivo de este roadmap es mostrar los pasos para transformar la solución actual en una versión completa de producción.
+
+- **Tracking de experimentos y versionado de modelos**
+  - Integrar MLflow o alternativa para registro de métricas y modelos
+  - Registrar datasets y parámetros de entrenamiento
+- **Pipeline modular con configuración**
+  - Configuración centralizada (`config.yaml` o Hydra)
+  - Separación de rutas, hiperparámetros y tipos de modelos
+- **Batch processing para grandes volúmenes**
+  - Script para predecir ~4M clientes mensualmente desde S3
+  - Procesamiento en chunks y escritura eficiente de outputs
+- **Monitoreo de modelos y drift**
+  - Métricas de estabilidad (PSI)
+  - Alertas ante degradación o cambio en la distribución de datos
+- **CI/CD y despliegue automatizado**
+  - Tests unitarios y linting
+  - Construcción de contenedores y despliegue automático
+  - Shadow mode y rollback para modelos nuevos
+- **Mejora de features (NLP)**
+  - Identificación de consultas sobre créditos hipotecarios
+  - Feature adicional para el modelo de propensión
+
+> ⚡ Recomendación: implementar incrementalmente, empezando por tracking y configuración modular, luego batch, monitoreo y CI/CD, y finalmente NLP.
+
 
 ---
 
