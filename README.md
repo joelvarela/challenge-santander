@@ -22,7 +22,7 @@ En esta rama se trabajó para lograr:
 > ✅ Estado: funcional para pruebas locales y despliegue de la API.
 
 ---
-
+ 
 ## 2. 🛠 Roadmap Técnico: Funcionalidades faltantes / próximas mejoras
 
 El objetivo de este roadmap es mostrar los pasos para transformar la solución actual en una versión completa de producción.
